@@ -1,0 +1,24 @@
+include templates/header.pug
+
+.container
+	.row
+		h1= "Detalle de Usuario"
+
+		.profile
+			div
+				label= "Usuario: " 
+				span= user[0].USERNAME
+			div
+				label= "Nombre: "
+				span= user[0].USER_NOMBRE
+			div
+				label= "Apellido: "
+				span= user[0].USER_APELLIDO
+			div
+				label= "Email: "
+				span= user[0].USER_EMAIL
+			div
+				a(href='/') Home
+
+
+include templates/footer.pug

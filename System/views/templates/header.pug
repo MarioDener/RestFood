@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+	head
+		title= title
+		link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+		link(type='text/css', rel='stylesheet', href='../style/materialize.min.css', media='screen,projection')
+		link(type='text/css', rel='stylesheet', href='../style/style.css', media='screen,projection')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+	body
+	
+		nav
+			.nav-wrapper(style='width:95%;margin:auto')
+				a.brand-logo(href='/') Logo
+				a.button-collapse(href='#',data-activates='mobile-demo')
+					i.material-icons menu
+				ul.right.hide-on-med-and-down
+					li
+						a(href='/') Home
+					li
+						a(href='/user_json') User JSON
+					li
+						a(href='/new_user/') Nuevo Usuario
+					li
+						a(href='/new_customer/') Nuevo Restaurante		
