@@ -6,9 +6,9 @@ var mysql = require("mysql");
 var app = express();
 
 // requerimientos propios del sistema
-var con = require('./System/app/system/connection');
-var user = require('./System/app/User');
-var cust = require('./System/app/Customer');
+var con = require('./App/system/connection');
+var user = require('./App/User');
+var cust = require('./App/Customer');
 
 
 // configuracion para session con express
@@ -56,9 +56,19 @@ conec.connect(function(err){
 // Metodo para observar los usuario que existen en el sistema
 app.get('/',function(req,res){
 	user.read(function(resdata){
-		res.render('home',{title:'Usuarios',datos:resdata});
+		res.render('App/Dashboard/read_dash',{title:'Usuarios',datos:resdata});
 	})
 })
+
+/****	****	****	****	****
+		RUTAS PARA USER
+****	****	****	****	****/
+app.get('/users',function(req,res){
+	user.read(function(resdata){
+		res.render('App/User/read_users',{title:'Usuarios',datos:resdata});
+	})
+})
+
 
 // Metodo para mostrar el detalle de un usuario segun su identificador
 app.get('/user/:id',function(req,res){
@@ -79,12 +89,6 @@ app.get('/new_user',function(req,res){
 		res.render('App/Conf/error',{title:"Iniciar Sesion"});
 	}
 })
-
-// Codigo para mostrar el formulario de nuevo cunsimidor
-app.get('/new_customer',function(req,res){
-	res.render('App/Customer/create_customer',{title:"Nuevo Restaurante"});
-})
-
 // Metodo para guardar un usuario a la base datos
 app.post('/save_user',function(req,response){
 	var username = req.body.username;
@@ -106,10 +110,7 @@ app.post('/save_user',function(req,response){
 			response.redirect('/');
 		}
 	});
-
 })
-
-
 // Metodo para eliminar un usuario del sistema
 app.get('/del_user/:id',function(req,response){
 	user.delete(req.params.id,function(resdata){
@@ -140,11 +141,54 @@ app.get('/user_json',function(req,res){
 		RUTAS PARA CUSTOMER 
 ****	****	****	****	****/
 
-app.get('/customer',function(req,res){
+app.get('/customers',function(req,res){
 	cust.read(function(resdata){
-		res.render('App/Customer/read_customer',{title:'Restaurantes'});
+		res.render('App/Customer/read_customer',{title:'Restaurantes',datos:resdata});
 	})
 })
+// Codigo para mostrar el formulario de nuevo cunsimidor
+app.get('/new_customer',function(req,res){
+	res.render('App/Customer/create_customer',{title:"Nuevo Restaurante"});
+})
+// Metodo para guardar un restaurante a la base datos
+app.post('/save_customer',function(req,response){
+	var name = req.body.name;
+	var password = req.body.password;
+	var info = req.body.info;
+	var place	 = req.body.place;
+	var phone	 = req.body.phone;
+	// objeto que sera utilizado para almacenar la información
+	var data = {
+		S_NAME : name,
+		S_ADDRESS : place,
+		N_PHONE	: phone,
+		N_FUNDATOR: 1
+	}
+
+	// Consulta que almacenara los datos	
+	cust.create(data,function(res){
+		console.log(res);
+		if (res.state == true) {
+			response.redirect('/customers');
+		}
+	});
+})
+// metodo para presentar los restaurantes en json
+app.get('/customer_json',function(req,res){
+	cust.read(function(resdata){
+		res.json({customer:resdata});
+	})
+});
+// metodo para mostrar el detalle de un customer
+app.get('/customer/:id',function(req,res){
+	conec.query('SELECT * FROM CUSTOMER WHERE ID_CUSTOMER = ?',req.params.id,function(err,rows){
+		if(err) throw err;
+		// retornamos los datos al front end
+		res.render('App/Customer/detail_customer',{title:'Detalle de Customer',user:rows});
+	});
+});
+
+
 
 // codigo para correr el servidor dentro del puerto establecido
 app.listen(3000,function(){

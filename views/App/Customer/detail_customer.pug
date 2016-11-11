@@ -1,0 +1,19 @@
+include ../../templates/header.pug
+
+.container
+	.row
+		h1= "Detalle de Restaurante"
+
+		.profile
+			div
+				label= "Restaurante: " 
+				span= user[0].S_NAME
+			
+			div
+				label= "Telefono: "
+				span= user[0].N_PHONE
+			div
+				a(href='/customers') Home
+
+
+include ../../templates/footer.pug

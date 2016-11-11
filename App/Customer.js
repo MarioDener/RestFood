@@ -9,9 +9,9 @@ module.exports = {
 				var rsdata = {state:true,data:res.insertId};				
 				callback(rsdata);
 			});
-		}, 100);
+		}, 500);
 	},
-	read: function(){
+	read: function(callback){
 		setTimeout(function(){
 			conec.query('SELECT * FROM CUSTOMER',function(err,rows){
 				if(err) throw err;

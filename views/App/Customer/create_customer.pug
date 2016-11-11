@@ -2,13 +2,13 @@ include ../../templates/header.pug
 
 .container.content
   .row
-    form.col.s12(action='/save_custumer',method='post')
+    form.col.s12(action='/save_customer',method='post')
       
       .row
         .col.s12
           .row
               .input-field
-                input#last_name.validate(type='text',name='Nombre del Restaurante')
+                input#last_name.validate(type='text',name='name')
                 label(for='name_customer') Nombre del Restaurante
       
       .row

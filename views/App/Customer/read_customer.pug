@@ -1,0 +1,28 @@
+include ../../templates/header.pug
+
+.container.content
+	.row
+		a.waves-effect.waves-light.btn(href='/new_customer/')= "New"		
+		a.waves-effect.waves-light.btn(href='/customer_json/')= "Json"
+
+	.row
+		table
+			thead
+				tr
+					th(data-field='id') #
+					th(data-field='name') Name
+					th(data-field='price') Phone
+					th(data-field='price') Address
+					th(data-field='price') Opciones
+			tbody
+				each val,index in datos
+					tr
+						td= val.ID_CUSTOMER
+						td= val.S_NAME
+						td= val.N_PHONE
+						td= val.S_ADDRESS
+						td
+							a.waves-effect.waves-light.btn(href='/customer/' +  val.ID_CUSTOMER) detail 
+							a.waves-effect.waves-light.btn(href='/del_user/' +  val.ID_CUSTOMER) delete
+
+include ../../templates/footer.pug
