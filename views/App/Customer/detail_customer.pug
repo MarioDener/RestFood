@@ -2,18 +2,53 @@ include ../../templates/header.pug
 
 .container
 	.row
-		h1= "Detalle de Restaurante"
-
-		.profile
-			div
-				label= "Restaurante: " 
-				span= user[0].S_NAME
-			
-			div
-				label= "Telefono: "
-				span= user[0].N_PHONE
-			div
-				a(href='/customers') Home
-
+		ol.breadcrumb
+			li
+				a(href='/') Inicio
+			li
+				a(href='/customers') Restaurantes
+			li.active Detalle Restaurante
+	.row
+		.panel.panel-default
+			.panel-heading
+				.panel-title= 'Restaurante ' + user[0].S_NAME
+			.panel-body
+				.col-md-4
+					.thumbnail
+						img(src= '../image/customer/' + user[0].ID_CUSTOMER)
+						.caption
+							h3.text-center= user[0].S_NAME
+							p.text-center= user[0].N_PHONE
+				.col-md-8
+					div.row
+						div
+							label= "Restaurante: " 
+							span= user[0].S_NAME
+						div
+							label= "Telefono: "
+							span= user[0].N_PHONE
+						div
+							label= "Direccion: "
+							span= user[0].S_ADDRESS
+					div.row
+						include create_gallery.pug
+	.row
+		h2 Galerias
+		table.table.table-striped.table-hover
+			thead
+				tr
+					th(data-field='id') #
+					th(data-field='name') Name
+					th(data-field='options') _
+					th(data-field='options') _
+			tbody
+				each val,index in galleries
+					tr
+						td= val.ID_GALERIA
+						td= val.S_NOMBRE
+						td
+							a.btn.btn-warning(href='/customer/' +  val.ID_CUSTOMER) detail
+						td
+							a.btn.btn-danger(href='/del_cus/' +  val.ID_CUSTOMER) delete
 
 include ../../templates/footer.pug

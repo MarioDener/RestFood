@@ -1,1 +1,25 @@
-new_user.pug
+form(action='/save_user',method='post',enctype='multipart/form-data')
+	.col-md-6
+		.form-group
+			label(for='user_username') Username
+			input#user_username.form-control(type='text',name='user_username', placeholder='Nombre de Usuario')
+		.form-group
+			label(for='user_Name') Nombre
+			input#user_Name.form-control(type='text',name='user_Name', placeholder='Nombres')
+		.form-group
+			label(for='user_Lastname') Apellido
+			input#user_Lastname.form-control(type='text',name='user_Lastname', placeholder='Apellidos')
+	.col-md-6
+		.form-group
+			label(for='user_password') Password
+			input#user_password.form-control(type='password',name='user_password', placeholder='Password')
+		.form-group
+			label(for='user_email') Email
+			input#user_email.form-control(type='email',name='user_email', placeholder='email@domain.com')
+		.form-group
+			label(for='exampleInputFile') Photo
+			input#exampleInputFile(type='file',name="user_photo")
+			p.help-block Profile Photo
+		.form-group
+			.col-sm-offset-2.col-sm-10.text-right
+				button.btn.btn-primary(type='submit') Nuevo Usuario

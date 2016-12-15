@@ -1,0 +1,13 @@
+form(action='/save_gallery',method='post')
+  h3 Nueva Galeria
+  .form-group
+    label(for='name') Galería
+    input.form-control(type='text',name='customer_name_gallery', placeholder='Nombre de Galería')
+  .form-group
+    label(for='name') Imagenes
+    input.form-cotrol(type='file',name='customer_files[]')
+    a.btn.btn-default Agregar
+  .form-group
+    .col-sm-offset-2.col-sm-10.text-right
+      input(type='hidden',name='customer_key',value=user[0].ID_CUSTOMER)
+      button.btn.btn-primary(type='submit') Nueva Galeria

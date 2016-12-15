@@ -33,5 +33,14 @@ module.exports ={
 		setTimeout(function(){
 			callback('updated');
 		}, 100);
+	},
+	detail: function(data,callback){
+		setTimeout(function(){
+			conec.query('SELECT * FROM USER WHERE ID_USER = ?',data,function(err,rows){
+				if(err) throw err;
+				// retornamos los datos al front end
+				callback(rows);				
+			})
+		}, 100);
 	}
 }

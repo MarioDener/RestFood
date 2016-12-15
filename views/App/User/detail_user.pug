@@ -1,1 +1,37 @@
-detail_user.pug
+include ../../templates/header.pug
+
+.container
+	.row
+		ol.breadcrumb
+			li
+				a(href='/') Inicio
+			li
+				a(href='/users') Usuarios
+			li.active Detalle Usuario
+	.row
+		.panel.panel-default
+			.panel-heading
+				.panel-title Detalle Usuario
+			.panel-body
+				.col-md-4
+					.thumbnail
+						img(src= '../image/users/' + user[0].ID_USER)
+						.caption
+							h3.text-center= user[0].USERNAME
+							p= user[0].USER_EMAIL
+				.col-md-8
+					div
+						label= "Usuario: " 
+						span= user[0].USERNAME
+					div
+						label= "Nombre: "
+						span= user[0].USER_NOMBRE
+					div
+						label= "Apellido: "
+						span= user[0].USER_APELLIDO
+					div
+						label= "Email: "
+						span= user[0].USER_EMAIL
+
+
+include ../../templates/footer.pug

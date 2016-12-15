@@ -1,50 +1,27 @@
-include ../../templates/header.pug
-
-.container.content
-  .row
-    form.col.s12(action='/save_customer',method='post')
-      
-      .row
-        .col.s12
-          .row
-              .input-field
-                input#last_name.validate(type='text',name='name')
-                label(for='name_customer') Nombre del Restaurante
-      
-      .row
-        .col.s7
-          .row
-            .input-field
-              input#password.validate(type='password',name='password',placeholder='Minimo 6 caracteres')
-              label(for='password') Constraseña
-          .row
-            .input-field
-              input#last_name.validate(type='text',name='info', placeholder='Descripción del negocio')
-              label(for='info') Información
-          .row
-            .input-field
-              input#last_name.validate(type='text',name='place', placeholder='.')
-              label(for='info') Dirección
-          .row
-            .input-field
-              input#last_name.validate(type='text',name='phone', placeholder='Solo números')
-              label(for='phone') Teléfono
-          .row
-            .input-field
-              input.waves-effect.waves-light.btn(type='submit',value='Crear')
-
-
-
-        .col.s5
-          .card
-            .card-image
-              img(src='https://s-media-cache-ak0.pinimg.com/originals/81/3d/33/813d331a8129b509fe0d2b536684b1b3.png')
-          .file-field.input-field
-            .btn
-              span= 'Foto Perfil'
-              input.validate(type="file")
-            .file-path-wrapper
-              input.file-path.validate(type="text")
-
-
-include ../../templates/footer.pug
+form(action='/save_customer',method='post',enctype='multipart/form-data')
+  .col-md-6
+    .form-group
+      label(for='name') Restaurant
+      input#name.form-control(type='text',name='name', placeholder='Nombre del Restaurante')
+    .form-group
+      label(for='info') Information
+      input#info.form-control(type='text',name='info', placeholder='Information about business')
+    .form-group
+      label(for='place') Address
+      input#place.form-control(type='text',name='place', placeholder='Restaurant Address')
+  .col-md-6
+    .form-group
+      label(for='password') Password
+      input#password.form-control(type='password',name='password', placeholder='Password')
+    .form-group
+      label(for='phone') Phone
+      input#phone.form-control(type='text',name='phone', placeholder='Phone')
+    .form-group
+      label(for='exampleInputFile') Profile Photo
+      input#exampleInputFile(type='file',name="foto_perfil")
+    .form-group
+      label(for='exampleInputFile') Title Photo
+      input#exampleInputFile(type='file',name="foto_portada")
+    .form-group
+      .col-sm-offset-2.col-sm-10.text-right
+        button.btn.btn-primary(type='submit') Nuevo Cliente

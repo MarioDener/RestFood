@@ -1,28 +1,54 @@
 include ../../templates/header.pug
-
-.container.content
+.container
 	.row
-		a.waves-effect.waves-light.btn(href='/new_customer/')= "New"		
-		a.waves-effect.waves-light.btn(href='/customer_json/')= "Json"
-
+		.col-md-12
+			ol.breadcrumb
+				li
+					a(href='/') Inicio
+				li.active Restaurantes
 	.row
-		table
-			thead
-				tr
-					th(data-field='id') #
-					th(data-field='name') Name
-					th(data-field='price') Phone
-					th(data-field='price') Address
-					th(data-field='price') Opciones
-			tbody
-				each val,index in datos
-					tr
-						td= val.ID_CUSTOMER
-						td= val.S_NAME
-						td= val.N_PHONE
-						td= val.S_ADDRESS
-						td
-							a.waves-effect.waves-light.btn(href='/customer/' +  val.ID_CUSTOMER) detail 
-							a.waves-effect.waves-light.btn(href='/del_user/' +  val.ID_CUSTOMER) delete
+		.col-md-12
+			.page-header
+				h1 Restaurantes 
+					small Panel para restaurantes
+	.row
+	
+		.col-md-12
+			.panel.panel-default
+				.panel-heading
+					h3.panel-title Nuevo Restaurante
+				.panel-body
+					include create_customer.pug
+	row
+	
+		.panel.panel-default
+			.panel-heading
+				h3.panel-title Clientes
+			.panel-body
+				ol.nav.nav-pills.me-small-menu-btn(role='tablist')
+					li.active
+						a(href='/customers') Restaurantes
+					li
+						a(href='/customer_json') Json
+				table.table.table-striped.table-hover
+					thead
+						tr
+							th(data-field='id') #
+							th(data-field='name') Name
+							th(data-field='price') Phone
+							th(data-field='price') Address
+							th(data-field='price') _
+							th(data-field='price') _
+					tbody
+						each val,index in datos
+							tr
+								td= val.ID_CUSTOMER
+								td= val.S_NAME
+								td= val.N_PHONE
+								td= val.S_ADDRESS
+								td
+									a.btn.btn-warning(href='/customer/' +  val.ID_CUSTOMER) detail
+								td
+									a.btn.btn-danger(href='/del_cus/' +  val.ID_CUSTOMER) delete
 
 include ../../templates/footer.pug

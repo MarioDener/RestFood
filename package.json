@@ -22,6 +22,7 @@
     "express-session": "^1.14.2",
     "formidable": "^1.0.17",
     "fs": "0.0.1-security",
+    "multer": "^1.2.0",
     "path": "^0.12.7"
   }
 }
