@@ -106,38 +106,58 @@ app.get('/new_user',function(req,res){
 	}
 })
 // Metodo para guardar un usuario a la base datos
-app.post('/save_user',uploadUserPhonto.single('user_photo'),function(req,response){
-	var username = req.body.user_username;
-	var name     = req.body.user_Name;
-	var lastname = req.body.user_Lastname;
-	var password = req.body.user_password;
-	var email	 = req.body.user_email;
-	// objeto que sera utilizado para almacenar la información
-	var data = {
-		USERNAME : username,
-		USER_NOMBRE : name,
-		USER_APELLIDO : lastname,
-		USER_PASSWORD : password,
-		USER_EMAIL	: email,
-		USER_STATE : '0',
-		USER_SESSION : '0'
-	}
-	// Consulta que almacenara los datos	
-	user.create(data,function(res){
-		console.log(res);
-		if (res.state == true) {
-			var file = __dirname + '/public/resource/users/' + res.data;
-			fs.rename(req.file.path, file, function(err) {
-			    if (err) {
-			      console.log(err);
-			      res.send(500);
-			    } else {
-			      console.log({message: 'File uploaded successfully',filename: res.data});
-			    }
-			});
-			response.redirect('/users');
+app.post('/save_user',uploadUserPhonto.single('user_photo'),function(req,response) {
+	var bError = false;
+
+	if (
+		req.body.user_username==" " ||
+		req.body.user_Name==" " ||
+		req.body.user_Lastname==" " ||
+		req.body.user_password==" " ||
+		req.body.user_email==" "
+	) { bError = true;}
+
+	if (bError) {
+		console.log("Faltan Campos Requeridos");
+	} else {
+
+		var username = req.body.user_username;
+		var name     = req.body.user_Name;
+		var lastname = req.body.user_Lastname;
+		var password = req.body.user_password;
+		var email	 = req.body.user_email;
+
+		// objeto que sera utilizado para almacenar la información
+		var data = {
+			USERNAME : username,
+			USER_NOMBRE : name,
+			USER_APELLIDO : lastname,
+			USER_PASSWORD : password,
+			USER_EMAIL	: email,
+			USER_STATE : '0',
+			USER_SESSION : '0'
 		}
-	});
+		console.log(data);
+
+	}
+
+	// Consulta que almacenara los datos	
+	// user.create(data,function(res){
+	// 	console.log(res);
+	// 	if (res.state == true) {
+	// 		var file = __dirname + '/public/resource/users/' + res.data;
+	// 		fs.rename(req.file.path, file, function(err) {
+	// 		    if (err) {
+	// 		      console.log(err);
+	// 		      res.send(500);
+	// 		    } else {
+	// 		      console.log({message: 'File uploaded successfully',filename: res.data});
+	// 		    }
+	// 		});
+	// 		response.redirect('/users');
+	// 	}
+	// });
+
 });
 
 // Metodo para eliminar un usuario del sistema
